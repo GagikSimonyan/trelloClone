@@ -1,17 +1,23 @@
 <div class="board">
-    <div>
-        <button class="board__btn btn" (click)="btnClick()">+ Add a list</button>
-    </div>
 
-    <div class="newList">
-      <mat-form-field appearance="outline">
-        <mat-label>Enter list title *</mat-label>
-        <input matInput placeholder="Placeholder">
-        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-        <mat-hint>Hint</mat-hint>
-      </mat-form-field>
+  <div class="newList" *ngIf="isClicked">
+    <mat-form-field appearance="outline">
+      <mat-label>Enter list title * </mat-label>
+      <input #textInput class="newList__input" [formControl]="listForm" matInput placeholder="Enter list title *">
+    </mat-form-field>
+    <div class="newList__buttons buttons">
+      <button mat-raised-button class="btn buttons__add">Add list</button>
+      <button mat-button class="btn buttons__close" (click)="closePopup()">
+        <mat-icon>close</mat-icon>
+      </button>
     </div>
+  </div>
+
+  <div>
+    <button mat-raised-button class="board__btn btn" (click)="showPopup()" [ngClass]="isClicked ? 'hide' : 'show'">+ Add a list</button>
+  </div>
 </div>
+
 
 
 

@@ -1,1 +1,47 @@
-/* You can add global styles to this file, and also import other style files */
+
+@import '~@angular/material/theming';
+@include mat-core();
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+body {
+    font-family: 'Roboto', "Helvetica Neue", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    background-color: #eee;
+    color: #333;
+    overflow: hidden;
+    height: 100%;
+}
+
+.container {
+    max-width: 1300px;
+    padding: 0 10px;
+    margin: 0 auto;
+}
+
+.btn {
+    color: rgba(0, 0, 0, 0.87);
+    background-color: #e0e0e0;
+    box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
+    padding: 6px 16px;
+    font-size: 0.875rem;
+    min-width: 64px;
+    text-transform: uppercase;
+    font-weight: 500;
+    line-height: 1.75;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #d5d5d5;
+        box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+    }
+}
