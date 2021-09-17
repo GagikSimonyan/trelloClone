@@ -1,59 +1,27 @@
 <div class="board">
-
-  <div class="newList" *ngIf="isClicked">
-    <mat-form-field appearance="outline">
-      <mat-label>Enter list title * </mat-label>
-      <input #textInput class="newList__input" [formControl]="listForm" matInput placeholder="Enter list title *">
-    </mat-form-field>
-    <div class="newList__buttons buttons">
-      <button mat-raised-button class="btn buttons__add">Add list</button>
-      <button mat-button class="btn buttons__close" (click)="closePopup()">
-        <mat-icon>close</mat-icon>
-      </button>
+    <div class="columns-wrapper" cdkDropList cdkDropListOrientation="horizontal" [cdkDropListData]="tasksList" (cdkDropListDropped)="drop($any($event))">
+        <div #columns class="board-columns" cdkDropListGroup>
+            <app-column *ngFor="let column of tasksList" class="board-column" cdkDrag>
+                <h3 class="column-title">{{column.title}}</h3>
+            </app-column>
+        </div>
     </div>
-  </div>
 
-  <div>
-    <button mat-raised-button class="board__btn btn" (click)="showPopup()" [ngClass]="isClicked ? 'hide' : 'show'">+ Add a list</button>
-  </div>
+    <div class="newList" *ngIf="isClicked">
+        <mat-form-field appearance="outline">
+            <mat-label>Enter list title *</mat-label>
+            <input #textInput class="newList__input" [formControl]="listNameForm" matInput placeholder="Enter list title *" >
+        </mat-form-field>
+        <div class="newList__buttons buttons">
+            <button mat-raised-button class="btn buttons__add" (click)="addList()">Add list</button>
+            <button mat-button class="btn buttons__close" (click)="closePopup()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </div>
+    
+    <div>
+        <button mat-raised-button class="board__btn btn" (click)="showPopup()" [ngClass]="isClicked ? 'hide' : 'show'">+ Add a list</button>
+    </div>
 </div>
 
-
-
-
-
-
-
-
-
-
-
-<!-- <div class="example-container">
-    <h2>To do</h2>
-  
-    <div *ngFor="let item of data; index as i"
-      cdkDropList
-      #todoList="cdkDropList"
-      [cdkDropListData]="item.tasks"
-      [cdkDropListConnectedTo]="[getList(todoList)]"
-      class="example-list"
-      (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let item of item.tasks" cdkDrag>{{item.name}}</div>
-    </div>
-</div> -->
-<!-- 
-  <div class="example-container">
-    <h2>Done</h2>
-  
-    <div
-      cdkDropList
-      #doneList="cdkDropList"
-      [cdkDropListData]="done"
-      [cdkDropListConnectedTo]="[todoList]"
-      class="example-list"
-      (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let item of done" cdkDrag>{{item}}</div>
-    </div>
-  </div>
-  
-   -->
