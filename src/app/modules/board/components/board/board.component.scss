@@ -3,6 +3,7 @@
 .board {
     display: flex;
     padding: 20px;
+    // justify-content: space-between;
 
     &__btn {
         margin-left: 30px;
@@ -19,37 +20,9 @@
     margin-left: 30px;
 }
 
-.hide {
-    display: none;
-}
-
-.show {
-    display: block;
-}
-
-
-.buttons {
-    &__add {
-        color: #fff;
-        background-color: #3f51b5;
-        &:hover {
-            background-color: #303f9f;
-        }
-    }
-    &__close {
-        background-color: transparent;
-        border: none;
-        box-shadow: none;
-        &:hover {
-            background-color: rgba(0, 0, 0, 0.04);
-        }
-    }
-}
-
-  
 .board-columns {
     display: flex;
-    max-width: 900px;
+    max-width: 1300px;
     overflow-x: auto; // for more than 4 cols
 }
 
@@ -71,9 +44,9 @@
     }
   
     .column-title {
-      font: 700 20px 'Roboto', sans-serif;
-      cursor: pointer;
       margin-bottom: 10px;
+      font: 700 20px 'Roboto', sans-serif;
+      cursor: grab;
     }
   }
   

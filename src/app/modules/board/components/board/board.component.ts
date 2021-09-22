@@ -15,10 +15,9 @@ import { first } from 'rxjs/operators';
 export class BoardComponent implements OnInit {
   
   tasksList: TasksList[] = [];
-  @ViewChild('textInput') textInput!: ElementRef<HTMLInputElement>;
+  @ViewChild('listInput') listInput!: ElementRef<HTMLInputElement>;
   listNameForm = new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z0-9_.-]*$')]);
   isClicked: boolean = false;
-  
 
   constructor(
     private tasksListService: TasksListService
@@ -29,22 +28,21 @@ export class BoardComponent implements OnInit {
   }
 
   showPopup() {
-    // this.tasksListService.addList()
     this.isClicked = !this.isClicked;
-    setTimeout(() => this.textInput.nativeElement.focus());
+    setTimeout(() => this.listInput.nativeElement.focus());
   }
-
 
   closePopup() {
     this.isClicked = !this.isClicked;
     this.listNameForm.patchValue('');
   }
 
+
+
   addList() {
-    this.textInput.nativeElement.focus();
+    this.listInput.nativeElement.focus();
     if (this.listNameForm.value.trim()) {
       this.tasksListService.addList(this.listNameForm.value)
-      // .pipe(first())
       .subscribe((data) => {
         this.tasksList.push(data);
       });
@@ -56,7 +54,6 @@ export class BoardComponent implements OnInit {
     this.tasksListService.getList()
     .subscribe((data) => {
       this.tasksList = data;
-      console.log(this.tasksList);
     })
   }
 

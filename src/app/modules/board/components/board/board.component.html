@@ -2,15 +2,17 @@
     <div class="columns-wrapper" cdkDropList cdkDropListOrientation="horizontal" [cdkDropListData]="tasksList" (cdkDropListDropped)="drop($any($event))">
         <div #columns class="board-columns" cdkDropListGroup>
             <app-column *ngFor="let column of tasksList" class="board-column" cdkDrag>
-                <h3 class="column-title">{{column.title}}</h3>
+                <h3 class="column-title title">{{column.title}}</h3>
+                <app-add-card></app-add-card>
             </app-column>
         </div>
     </div>
 
+
     <div class="newList" *ngIf="isClicked">
         <mat-form-field appearance="outline">
             <mat-label>Enter list title *</mat-label>
-            <input #textInput class="newList__input" [formControl]="listNameForm" matInput placeholder="Enter list title *" >
+            <input #listInput class="newList__input" [formControl]="listNameForm" matInput placeholder="Enter list title *" >
         </mat-form-field>
         <div class="newList__buttons buttons">
             <button mat-raised-button class="btn buttons__add" (click)="addList()">Add list</button>

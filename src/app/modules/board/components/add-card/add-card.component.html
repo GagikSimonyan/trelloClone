@@ -1,0 +1,17 @@
+<div class="createCard">
+    <div>
+        <button mat-raised-button class="card__btn btn" (click)="showCardPopup()" [ngClass]="cardIsClicked ? 'hide' : 'show' ">+ Add a card</button>
+    </div>
+    <div class="newCard" *ngIf="cardIsClicked">
+        <mat-form-field appearance="standard">
+            <mat-label>Enter a title for this card * </mat-label>
+            <input matInput #cardInput>
+        </mat-form-field>
+        <div class="newCard__buttons buttons">
+            <button mat-raised-button class="btn buttons__add" >Add card</button>
+            <button mat-button class="btn buttons__close" (click)="closeCardPopup()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </div>
+</div>
