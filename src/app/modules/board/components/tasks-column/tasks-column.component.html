@@ -1,0 +1,16 @@
+<div class="column">
+    <h3 class="column__title title">{{column.title}}</h3>
+    <div
+        class="cards"
+        cdkDropList
+        [cdkDropListData]="column.cards"
+        (cdkDropListDropped)="drop($any($event))"
+    >
+        <app-task
+            *ngFor="let card of column.cards"
+            cdkDrag
+            [card]="card"
+        ></app-task>
+    </div>
+    <app-add-card></app-add-card>
+</div>

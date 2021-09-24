@@ -3,8 +3,6 @@ import { FormControl, Validators } from '@angular/forms';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import { TasksList } from '../../models/tasks-list.model';
 import { TasksListService } from '../../services/tasks-list/tasks-list.service';
-import { Observable } from 'rxjs';
-import { first } from 'rxjs/operators';
 
 
 @Component({
@@ -14,9 +12,9 @@ import { first } from 'rxjs/operators';
 })
 export class BoardComponent implements OnInit {
   
-  tasksList: TasksList[] = [];
   @ViewChild('listInput') listInput!: ElementRef<HTMLInputElement>;
   listNameForm = new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z0-9_.-]*$')]);
+  tasksList: TasksList[] = [];
   isClicked: boolean = false;
 
   constructor(
@@ -36,8 +34,6 @@ export class BoardComponent implements OnInit {
     this.isClicked = !this.isClicked;
     this.listNameForm.patchValue('');
   }
-
-
 
   addList() {
     this.listInput.nativeElement.focus();

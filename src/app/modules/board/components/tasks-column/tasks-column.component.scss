@@ -1,0 +1,28 @@
+.column__title {
+    margin-bottom: 10px;
+    font: 700 20px 'Roboto', sans-serif;
+    cursor: grab;
+}
+
+.cards {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    min-height: 25px;
+}
+
+.cdk-drag-preview {
+    box-sizing: content-box;
+    opacity: 0.9;
+  }
+  .cdk-drag-placeholder {
+    opacity: 0;
+  }
+  
+  .cdk-drag-animating {
+    transition: all 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+  
+  .tasks.cdk-drop-list-dragging app-task:not(.cdk-drag-placeholder) {
+    transition: all 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
