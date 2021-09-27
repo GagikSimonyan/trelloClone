@@ -5,10 +5,10 @@
     <div class="newCard" *ngIf="cardIsClicked">
         <mat-form-field appearance="standard">
             <mat-label>Enter a title for this card * </mat-label>
-            <input matInput #cardInput>
+            <input matInput #cardInput [formControl]="cardNameForm">
         </mat-form-field>
         <div class="newCard__buttons buttons">
-            <button mat-raised-button class="btn buttons__add" >Add card</button>
+            <button mat-raised-button class="btn buttons__add" [disabled]="!cardInput.value" (click)="onAddCard()">Add card</button>
             <button mat-button class="btn buttons__close" (click)="closeCardPopup()">
                 <mat-icon>close</mat-icon>
             </button>

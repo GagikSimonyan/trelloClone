@@ -60,5 +60,4 @@ export class BoardComponent implements OnInit {
       event.currentIndex
     );
   }
-
 }
