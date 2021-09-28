@@ -1,9 +1,9 @@
+import { Task } from './../../models/task.model';
 import { Observable } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Task } from '../../models/task.model';
 import { TasksList } from '../../models/tasks-list.model';
 
 @Injectable()
@@ -32,6 +32,10 @@ export class TasksListService {
     .pipe(
       map(() => column.cards[column.cards.length-1])
     );
+  }
+
+  updateCard(card: Task) {
+    
   }
 
   getList() {

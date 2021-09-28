@@ -1,4 +1,22 @@
-<div class="card" >
-    <p class="card__title">{{card.title}}</p>
-    <button mat-button class="card__btn"><mat-icon>edit</mat-icon></button>
+<div class="card__block">
+    <div class="card" *ngIf="!isClicked;else showEditCardPopup">
+        <p class="card__title">{{card.title}}</p>
+        <button mat-button class="card__btn" (click)="showEditPopup()" ><mat-icon>edit</mat-icon></button>
+    </div>
+
+    <ng-template #showEditCardPopup>
+        <div class="editCardTitle">
+            <mat-form-field appearance="standard">
+                <mat-label>Enter this card's title* </mat-label>
+                <input matInput #cardInput [(ngModel)]="card.title">
+            </mat-form-field>
+            <div class="newCard__buttons buttons">
+                <button mat-raised-button class="btn buttons__add" (click)="editCardTitle()">Save</button>
+                <button mat-button class="btn buttons__close" (click)="closeEditPopup()">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </div>
+        </div>
+    </ng-template> 
 </div>
+

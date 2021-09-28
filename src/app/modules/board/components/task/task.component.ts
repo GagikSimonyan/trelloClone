@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { TasksListService } from './../../services/tasks-list/tasks-list.service';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { Task } from '../../models/task.model';
 
 @Component({
@@ -9,10 +10,27 @@ import { Task } from '../../models/task.model';
 export class TaskComponent implements OnInit {
 
   @Input() card!: Task;
+  @ViewChild('cardInput') cardInput!: ElementRef<HTMLInputElement>;
 
-  constructor() { }
+  isClicked: boolean = false;
+
+  constructor(private tasksListService: TasksListService) { }
 
   ngOnInit(): void {
+  }
+
+  showEditPopup() {
+    this.isClicked = !this.isClicked;
+    setTimeout(() => this.cardInput.nativeElement.focus());
+  }
+
+  closeEditPopup() {
+    this.isClicked = !this.isClicked;
+  }
+
+  editCardTitle() {
+    console.log('aaa', this.card);
+    // this.tasksListService.updateCard()
   }
 
 }

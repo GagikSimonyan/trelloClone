@@ -13,7 +13,6 @@ import { TasksList } from '../../models/tasks-list.model';
 export class TasksColumnComponent implements OnInit {
 
   @Input() column!: TasksList;
-  @Input() columnIndex!: number;
 
   constructor(private http: HttpClient, private tasksListService: TasksListService) { }
 

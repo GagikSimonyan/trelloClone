@@ -13,9 +13,8 @@
         >
             <app-tasks-column
                 class="board-column"
-                *ngFor="let column of tasksList; index as i"
+                *ngFor="let column of tasksList"
                 [column]="column" 
-                [columnIndex]="i" 
                 cdkDrag
             ></app-tasks-column>
         </div>
