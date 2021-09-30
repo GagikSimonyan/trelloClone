@@ -1,36 +1,28 @@
 <div class="board">
     <div
-        class="columns-wrapper"
+        class="board__wrapper"
         cdkDropList
         cdkDropListOrientation="horizontal"
-        [cdkDropListData]="tasksList"
+        [cdkDropListData]="tasksLists"
         (cdkDropListDropped)="drop($any($event))"
     >
         <div
             #columns
-            class="board-columns"
+            class="board__columns"
             cdkDropListGroup
         >
             <app-tasks-column
-                class="board-column"
-                *ngFor="let column of tasksList"
-                [column]="column" 
+                class="board__column"
+                *ngFor="let column of tasksLists"
+                [column]="column"
+                (onRemoveList)="deleteList($event)"
                 cdkDrag
             ></app-tasks-column>
         </div>
     </div>
 
-
-
-
-
-
-
-
-
     
-    <div class="newList"
-        *ngIf="isClicked">
+    <div class="newList" *ngIf="isClicked;else addbtn">
         <mat-form-field appearance="outline">
             <mat-label>Enter list title *</mat-label>
             <input
@@ -59,13 +51,15 @@
         </div>
     </div>
 
-    <div>
-        <button
-            mat-raised-button
-            class="board__btn btn"
-            (click)="showPopup()"
-        >
-            + Add a list
-        </button>
-    </div>
+    <ng-template #addbtn>
+        <div class="board__btn">
+            <button
+                mat-raised-button
+                class="btn"
+                (click)="showPopup()"
+            >
+                + Add a list
+            </button>
+        </div>
+    </ng-template>
 </div>

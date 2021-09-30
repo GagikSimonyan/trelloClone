@@ -9,7 +9,7 @@ import { Task } from '../../models/task.model';
 })
 export class TaskComponent implements OnInit {
 
-  @Input() card!: Task;
+  @Input() card!: Array<string>;
   @ViewChild('cardInput') cardInput!: ElementRef<HTMLInputElement>;
 
   isClicked: boolean = false;

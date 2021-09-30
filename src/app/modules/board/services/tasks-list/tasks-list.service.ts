@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { TasksList } from '../../models/tasks-list.model';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class TasksListService {
@@ -15,10 +16,19 @@ export class TasksListService {
 
   constructor(private http: HttpClient) { }
 
-  addList(name: string, position = 0): Observable<any> {
+  getList(): Observable<TasksList[]> {
+    return this.http.get<TasksList[]>(`${environment.baseUrl}/lists`).pipe(
+      tap(console.log)
+    );
+  }
+
+  addList(name: string, position: number): Observable<TasksList> {
+
+    console.log('number ', position);
     const payload = {
+      id: uuidv4(),
       title: name,
-      cards: [],
+      cardsIds: [],
       position
     };
 
@@ -27,25 +37,16 @@ export class TasksListService {
     );
   }
 
-  addCard(column: TasksList): Observable<Task> {
-    return this.http.put(`${environment.baseUrl}/lists/${column.id}`, column)
-    .pipe(
-      map(() => column.cards[column.cards.length-1])
-    );
+  deleteList(id: string): Observable<TasksList> {
+    return this.http.delete<TasksList>(`${environment.baseUrl}/lists/` + id)
   }
 
-  updateCard(card: Task) {
-    
-  }
+  // addCard(column: TasksList): Observable<Task> {
+  //   return this.http.put(`${environment.baseUrl}/lists/${column.id}`, column)
+  //   .pipe(
+  //     map(() => column.cards[column.cards.length-1])
+  //   );
+  // }
 
-  getList() {
-    return this.http.get(this.getBaseUrl('lists')).pipe(
-      tap(console.log)
-    );
-  }
-
-  private getBaseUrl(path: string): string {
-      return `${environment.baseUrl}/${path}`
-  }
 }
 

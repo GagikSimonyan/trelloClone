@@ -3,11 +3,13 @@ import { Task } from "./task.model";
 export class TasksList {
     id: string;
     title: string;
-    cards: Task[] = [];
+    position: number;
+    cardsIds: Array<string> = [];
 
     constructor(data: any) {
         this.id = data.id;
-        this.cards = data.cards.map((card: any) => new Task(card))
+        this.cardsIds = data.cardsIds;
         this.title = data.title;
+        this.position = data.position;
     }
 }

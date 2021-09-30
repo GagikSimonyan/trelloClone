@@ -1,14 +1,25 @@
 <div class="column">
-    <h3 class="column__title title">{{column.title}}</h3>
-    <div class="cards"
+    <div class="column__header">
+        <h3 class="column__title title">{{column.title}}</h3>
+        <button
+            mat-button
+            class="btn buttons__close"
+            (click)="removeList(column)"
+        >
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <div
+        class="cards"
         cdkDropList
-        [cdkDropListData]="column.cards"
-        (cdkDropListDropped)="drop($any($event))">
-        <app-task
-            *ngFor="let card of column.cards"
+        [cdkDropListData]="column.cardsIds"
+        (cdkDropListDropped)="drop($any($event))"
+    >
+        <!-- <app-task
+            *ngFor="let card of column.cardsIds"
             cdkDrag
             [card]="card"
-        ></app-task>
+        ></app-task> -->
     </div>
-    <app-add-card (addTask)="addNewTaskToCurrentList($event)"></app-add-card>
+    <!-- <app-add-card (addTask)="addNewTaskToCurrentList($event)"></app-add-card> -->
 </div>
