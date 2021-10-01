@@ -4,7 +4,7 @@
         cdkDropList
         cdkDropListOrientation="horizontal"
         [cdkDropListData]="tasksLists"
-        (cdkDropListDropped)="drop($any($event))"
+        (cdkDropListDropped)="drop($event)"
     >
         <div
             #columns
@@ -63,3 +63,4 @@
         </div>
     </ng-template>
 </div>
+

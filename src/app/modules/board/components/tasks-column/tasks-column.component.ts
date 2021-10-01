@@ -16,7 +16,7 @@ export class TasksColumnComponent implements OnInit {
   @Input() position!: number;
   @Output() onRemoveList = new EventEmitter<TasksList>();
 
-  constructor(private http: HttpClient, private tasksListService: TasksListService) { }
+  constructor(private tasksListService: TasksListService) { }
 
   ngOnInit(): void {
   }

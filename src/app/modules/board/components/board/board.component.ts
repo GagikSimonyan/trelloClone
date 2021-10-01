@@ -1,6 +1,6 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { TasksList } from '../../models/tasks-list.model';
 import { TasksListService } from '../../services/tasks-list/tasks-list.service';
 
@@ -11,14 +11,14 @@ import { TasksListService } from '../../services/tasks-list/tasks-list.service';
   styleUrls: ['./board.component.scss'],
 })
 export class BoardComponent implements OnInit {
-  
   @ViewChild('listInput') listInput!: ElementRef<HTMLInputElement>;
+
   listNameForm = new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z0-9_.-]*$')]);
   tasksLists: TasksList[] = [];
   isClicked: boolean = false;
 
 
-  constructor(private tasksListService: TasksListService) {}
+  constructor(private tasksListService: TasksListService) { }
 
   ngOnInit() {
     this.getList();
@@ -36,48 +36,61 @@ export class BoardComponent implements OnInit {
 
   getList() {
     this.tasksListService.getList()
-    .subscribe((data) => {
-      this.tasksLists = data;
-    })
+      .subscribe((data) => {
+        this.tasksLists = data.sort((a, b) => a.position - b.position);
+      })
   }
 
   addList() {
     this.listInput.nativeElement.focus();
     if (this.listNameForm.value.trim()) {
-      // this.tasksLists.forEach((task, index) => {
-      //   task.position = index + 1;
-      // })
-      this.tasksListService.addList(this.listNameForm.value, this.tasksLists.length + 1)
-      .subscribe((data) => {
-        this.tasksLists.push(data);
-      });
+      this.tasksListService.addList(this.listNameForm.value, this.findHighestPosition())
+        .subscribe((data) => {
+          this.tasksLists.push(data);
+        });
       this.listNameForm.patchValue('');
     }
   }
 
   deleteList(column: TasksList) {
     this.tasksListService.deleteList(column.id)
-    .subscribe(() => {
-      this.tasksLists = this.tasksLists.filter(taskList => taskList.id !== column.id);
-    });
+      .subscribe(() => {
+        this.tasksLists = this.tasksLists.filter(taskList => taskList.id !== column.id);
+      });
   }
 
-  // findHighestPosition(arr: any): number {
-  //   let max = arr[0].position
-  //   arr.forEach((item: any) => {
-  //     if (item.position > max) {
-  //       max = item.position
-  //     }
-  //   });
+  findHighestPosition(): number {
+    const positions = this.tasksLists.map(tasklist => tasklist.position);
+    return Math.max(...positions) + 1;
+  }
 
-  //   return max + 1
-  // }
-
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<TasksList[]>) {
+    console.log(event);
+    console.log(event.container.data);
     moveItemInArray(
       event.container.data,
       event.previousIndex,
       event.currentIndex
     );
+
+    this.tasksLists = this.moveTaskList(event.container.data, event.previousIndex, event.currentIndex)
+
+    this.tasksListService.updateTasksPositions(this.tasksLists).subscribe(tasks => {
+      debugger;
+      // this.tasksLists = tasks;
+    })
+  }
+
+  moveTaskList(arr: TasksList[], fromIndex: number, toIndex: number) {
+    
+    let elem = arr[fromIndex];
+    arr.splice(fromIndex, 1);
+    arr.splice(toIndex, 0, elem);
+
+    arr.forEach((list, index) => {
+      list.position = index + 1;
+    });
+
+    return arr;
   }
 }
