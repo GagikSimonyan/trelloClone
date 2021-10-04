@@ -5,6 +5,7 @@ export class TasksList {
     title: string;
     position: number;
     cardsIds: Array<string> = [];
+    cards: Task[] = [];
 
     constructor(data: any) {
         this.id = data.id;

@@ -4,6 +4,8 @@ import { moveItemInArray, transferArrayItem, CdkDragDrop } from '@angular/cdk/dr
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Task } from '../../models/task.model';
 import { TasksList } from '../../models/tasks-list.model';
+import { v4 as uuidv4 } from 'uuid';
+
 
 @Component({
   selector: 'app-tasks-column',
@@ -18,19 +20,15 @@ export class TasksColumnComponent implements OnInit {
 
   constructor(private tasksListService: TasksListService) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    
   }
 
-  // addNewTaskToCurrentList(task: Task) {
-  //   task.listId = this.column.id;
-  //   this.column.cards.push(task);
-  //   this.tasksListService.addCard(this.column)
-  //   .subscribe(newTask => {
-  //     console.log(56555, newTask);
-      
-  //   });
-  // }
-
+  addTask(newTask: Task) {
+    newTask.id = uuidv4();
+    newTask.listId = this.column.id;
+    console.log('new tasks', newTask);
+  }
 
   removeList(column: TasksList) {
     this.onRemoveList.emit(column);
@@ -53,3 +51,4 @@ export class TasksColumnComponent implements OnInit {
     }
   }
 }
+

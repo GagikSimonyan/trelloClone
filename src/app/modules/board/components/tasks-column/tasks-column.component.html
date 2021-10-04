@@ -15,11 +15,13 @@
         [cdkDropListData]="column.cardsIds"
         (cdkDropListDropped)="drop($any($event))"
     >
-        <!-- <app-task
-            *ngFor="let card of column.cardsIds"
+        <app-task
+            *ngFor="let card of column.cards"
             cdkDrag
             [card]="card"
-        ></app-task> -->
+        ></app-task>
     </div>
-    <!-- <app-add-card (addTask)="addNewTaskToCurrentList($event)"></app-add-card> -->
+    <app-add-card 
+        (onAddTask)="addTask($event)"
+    ></app-add-card>
 </div>

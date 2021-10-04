@@ -10,7 +10,7 @@ import { Task } from '../../models/task.model';
 export class AddCardComponent {
 
   @ViewChild('cardInput') cardInput!: ElementRef<HTMLInputElement>;
-  @Output() addTask = new EventEmitter<Task>()
+  @Output() onAddTask = new EventEmitter<Task>()
   
   cardIsClicked: boolean = false;
   cardNameForm = new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z0-9_.-]*$')]);
@@ -28,7 +28,7 @@ export class AddCardComponent {
   onAddCard(){
     if (this.cardNameForm.valid) {
       const newTask = new Task({title: this.cardNameForm.value});
-      this.addTask.emit(newTask);
+      this.onAddTask.emit(newTask);
       this.closeCardPopup();
     }
   }

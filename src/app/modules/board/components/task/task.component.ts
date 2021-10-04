@@ -9,7 +9,7 @@ import { Task } from '../../models/task.model';
 })
 export class TaskComponent implements OnInit {
 
-  @Input() card!: Array<string>;
+  @Input() card!: Task;
   @ViewChild('cardInput') cardInput!: ElementRef<HTMLInputElement>;
 
   isClicked: boolean = false;
@@ -30,7 +30,6 @@ export class TaskComponent implements OnInit {
 
   editCardTitle() {
     console.log('aaa', this.card);
-    // this.tasksListService.updateCard()
   }
 
 }

@@ -1,8 +1,11 @@
+import { switchMap, tap } from 'rxjs/operators';
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { TasksList } from '../../models/tasks-list.model';
 import { TasksListService } from '../../services/tasks-list/tasks-list.service';
+import { Task } from '../../models/task.model';
+import { TaskService } from '../../services/task/task.service';
 
 
 @Component({
@@ -15,10 +18,14 @@ export class BoardComponent implements OnInit {
 
   listNameForm = new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z0-9_.-]*$')]);
   tasksLists: TasksList[] = [];
+  allTasks: Task[] = [];
+
   isClicked: boolean = false;
 
-
-  constructor(private tasksListService: TasksListService) { }
+  constructor(
+    private tasksListService: TasksListService,
+    private taskService: TaskService
+  ) { }
 
   ngOnInit() {
     this.getList();
@@ -36,8 +43,13 @@ export class BoardComponent implements OnInit {
 
   getList() {
     this.tasksListService.getList()
-      .subscribe((data) => {
-        this.tasksLists = this.tasksListService.getSortedLists(data);
+      .pipe(
+        tap(tasksList => this.tasksLists = this.tasksListService.getSortedLists(tasksList)),
+        switchMap(() => this.taskService.getTasks()),
+        tap(allTasks => this.allTasks = allTasks),
+      )
+      .subscribe(() => {
+        this.tasksLists.forEach(tasklist => tasklist.cards = this.allTasks.filter(task => tasklist.cardsIds.includes(task.id)))
       })
   }
 
@@ -65,8 +77,7 @@ export class BoardComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<TasksList[]>) {
-    console.log(event);
-    console.log(event.container.data);
+
     moveItemInArray(
       event.container.data,
       event.previousIndex,
@@ -74,21 +85,6 @@ export class BoardComponent implements OnInit {
     );
 
     event.container.data.forEach((list, index) => list.position = index + 1);
-
-    this.tasksListService.updateTasksPositions(this.tasksLists).subscribe(tasks => {
-      this.tasksLists = this.tasksListService.getSortedLists(tasks);
-    })
+    this.tasksListService.updateTasksPositions(this.tasksLists).subscribe()
   }
-
-  // moveTaskList(arr: TasksList[], fromIndex: number, toIndex: number) {
-    // let elem = arr[fromIndex];
-    // arr.splice(fromIndex, 1);
-    // arr.splice(toIndex, 0, elem);
-
-  //   arr.forEach((list, index) => {
-  //     list.position = index + 1;
-  //   });
-
-  //   return arr;
-  // }
 }
