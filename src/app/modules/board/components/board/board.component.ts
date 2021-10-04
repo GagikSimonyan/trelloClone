@@ -37,7 +37,7 @@ export class BoardComponent implements OnInit {
   getList() {
     this.tasksListService.getList()
       .subscribe((data) => {
-        this.tasksLists = data.sort((a, b) => a.position - b.position);
+        this.tasksLists = this.tasksListService.getSortedLists(data);
       })
   }
 
@@ -73,24 +73,22 @@ export class BoardComponent implements OnInit {
       event.currentIndex
     );
 
-    this.tasksLists = this.moveTaskList(event.container.data, event.previousIndex, event.currentIndex)
+    event.container.data.forEach((list, index) => list.position = index + 1);
 
     this.tasksListService.updateTasksPositions(this.tasksLists).subscribe(tasks => {
-      debugger;
-      // this.tasksLists = tasks;
+      this.tasksLists = this.tasksListService.getSortedLists(tasks);
     })
   }
 
-  moveTaskList(arr: TasksList[], fromIndex: number, toIndex: number) {
-    
-    let elem = arr[fromIndex];
-    arr.splice(fromIndex, 1);
-    arr.splice(toIndex, 0, elem);
+  // moveTaskList(arr: TasksList[], fromIndex: number, toIndex: number) {
+    // let elem = arr[fromIndex];
+    // arr.splice(fromIndex, 1);
+    // arr.splice(toIndex, 0, elem);
 
-    arr.forEach((list, index) => {
-      list.position = index + 1;
-    });
+  //   arr.forEach((list, index) => {
+  //     list.position = index + 1;
+  //   });
 
-    return arr;
-  }
+  //   return arr;
+  // }
 }

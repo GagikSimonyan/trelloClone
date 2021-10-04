@@ -37,25 +37,12 @@ export class TasksListService {
     return this.http.delete<TasksList>(`${environment.baseUrl}/lists/` + id)
   }
 
-  // changePositionOfTaskList(id: string, position: number) {
-  //   const payload = { id, position };
-  //   return this.http.patch(`${environment.baseUrl}/lists/${id}`, payload);
-  // }
-
   updateTasksPositions(tasksLists: TasksList[]): Observable<any> {
-    const observables = []
-    for (const list of tasksLists) {
-      observables.push(this.http.patch(`${environment.baseUrl}/lists/${list.id}`, {position: list.position}));
-    }
-
-    return zip(observables);
+    return zip(...tasksLists.map(list => this.http.patch(`${environment.baseUrl}/lists/${list.id}`, {position: list.position})));
   }
 
-  // addCard(column: TasksList): Observable<Task> {
-  //   return this.http.put(`${environment.baseUrl}/lists/${column.id}`, column)
-  //   .pipe(
-  //     map(() => column.cards[column.cards.length-1])
-  //   );
-  // }
+  getSortedLists(tasksLists: TasksList[]): TasksList[] {
+    return tasksLists.sort((a, b) => a.position - b.position);
+  }
 
 }
