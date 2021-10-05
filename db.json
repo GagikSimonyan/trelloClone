@@ -1,37 +1,29 @@
 {
   "lists": [
     {
-      "cardsIds": [
-        "fcd2ec0b-6gb3-480e-94f7-761f770b31db",
-        "fcd2ec0d-6gb3-480e-94f7-761f770b31db"
-      ],
       "id": "fcd2ec0d-6fb3-480e-94f7-761f770b31db",
       "title": "3",
-      "position": 2
+      "position": 1
     },
     {
-      "cardsIds": [],
       "id": "a219477e-b045-4a76-bacf-c43387c13164",
       "title": "4",
       "position": 4
     },
     {
-      "cardsIds": [],
       "id": "e1cf2cbd-c257-466a-9e29-d9247256a0dc",
       "title": "5",
       "position": 5
     },
     {
-      "cardsIds": [],
       "id": "546cba4a-a842-4de4-954d-b529d3e12e85",
       "title": "1",
-      "position": 3
+      "position": 2
     },
     {
-      "cardsIds": [],
       "id": "70ea0a20-a322-48f5-9d21-d501ef1b7efc",
       "title": "2",
-      "position": 1
+      "position": 3
     }
   ],
   "cards": [
@@ -39,13 +31,39 @@
       "id": "fcd2ec0d-6gb3-480e-94f7-761f770b31db",
       "title": "22",
       "description": "",
-      "listId": "fcd2ec0d-6fb3-480e-94f7-761f770b31db"
+      "listId": "fcd2ec0d-6fb3-480e-94f7-761f770b31db",
+      "position": 1
     },
     {
       "id": "fcd2ec0b-6gb3-480e-94f7-761f770b31db",
       "title": "31",
       "description": "4",
-      "listId": "fcd2ec0d-6fb3-480e-94f7-761f770b31db"
+      "listId": "fcd2ec0d-6fb3-480e-94f7-761f770b31db",
+      "position": 2
+    },
+    {
+      "id": "0b0e3a9c-40a2-4844-a240-a023585a6487",
+      "title": "fff",
+      "listId": "546cba4a-a842-4de4-954d-b529d3e12e85",
+      "description": ""
+    },
+    {
+      "id": "1a4577d0-e3e2-44bb-8f90-a4b9fe754966",
+      "title": "aaa",
+      "listId": "70ea0a20-a322-48f5-9d21-d501ef1b7efc",
+      "description": ""
+    },
+    {
+      "id": "6f4662b5-d43d-406e-98ef-88eddf056308",
+      "title": "ccc",
+      "listId": "70ea0a20-a322-48f5-9d21-d501ef1b7efc",
+      "description": ""
+    },
+    {
+      "id": "b004a047-85de-4f57-8800-6ccde6ec2d4b",
+      "title": "bbb",
+      "listId": "70ea0a20-a322-48f5-9d21-d501ef1b7efc",
+      "description": ""
     }
   ]
 }

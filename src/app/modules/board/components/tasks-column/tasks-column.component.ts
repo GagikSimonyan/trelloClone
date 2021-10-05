@@ -5,6 +5,7 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Task } from '../../models/task.model';
 import { TasksList } from '../../models/tasks-list.model';
 import { v4 as uuidv4 } from 'uuid';
+import { TaskService } from '../../services/task/task.service';
 
 
 @Component({
@@ -15,19 +16,21 @@ import { v4 as uuidv4 } from 'uuid';
 export class TasksColumnComponent implements OnInit {
 
   @Input() column!: TasksList;
-  @Input() position!: number;
   @Output() onRemoveList = new EventEmitter<TasksList>();
 
-  constructor(private tasksListService: TasksListService) { }
+  constructor(private taskService: TaskService) { }
 
   ngOnInit() {
-    
   }
 
   addTask(newTask: Task) {
     newTask.id = uuidv4();
     newTask.listId = this.column.id;
-    console.log('new tasks', newTask);
+    newTask.description = '';
+
+    this.taskService.addTask(newTask).subscribe((task) => {
+      this.column.cards.push(task);
+    })
   }
 
   removeList(column: TasksList) {

@@ -49,7 +49,7 @@ export class BoardComponent implements OnInit {
         tap(allTasks => this.allTasks = allTasks),
       )
       .subscribe(() => {
-        this.tasksLists.forEach(tasklist => tasklist.cards = this.allTasks.filter(task => tasklist.cardsIds.includes(task.id)))
+        this.tasksLists.forEach(tasklist => tasklist.cards = this.allTasks.filter(task => task.listId === tasklist.id))
       })
   }
 

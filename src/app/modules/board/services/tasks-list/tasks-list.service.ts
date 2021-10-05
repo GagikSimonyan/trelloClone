@@ -28,13 +28,11 @@ export class TasksListService {
       cardsIds: [],
       position
     };
-    return this.http.post<TasksList>(`${environment.baseUrl}/lists`, payload).pipe(
-      tap(console.log)
-    );
+    return this.http.post<TasksList>(`${environment.baseUrl}/lists`, payload);
   }
 
   deleteList(id: string): Observable<TasksList> {
-    return this.http.delete<TasksList>(`${environment.baseUrl}/lists/` + id)
+    return this.http.delete<TasksList>(`${environment.baseUrl}/lists/` + id);
   }
 
   updateTasksPositions(tasksLists: TasksList[]): Observable<any> {

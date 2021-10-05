@@ -1,6 +1,6 @@
-import { TasksListService } from './../../services/tasks-list/tasks-list.service';
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { Task } from '../../models/task.model';
+import { TaskService } from '../../services/task/task.service';
 
 @Component({
   selector: 'app-task',
@@ -14,7 +14,7 @@ export class TaskComponent implements OnInit {
 
   isClicked: boolean = false;
 
-  constructor(private tasksListService: TasksListService) { }
+  constructor(private taskService: TaskService) { }
 
   ngOnInit(): void {
   }
@@ -29,7 +29,8 @@ export class TaskComponent implements OnInit {
   }
 
   editCardTitle() {
-    console.log('aaa', this.card);
+    this.taskService.editTask(this.card.id, this.cardInput.nativeElement.value).subscribe()
+    this.closeEditPopup();
   }
 
 }
