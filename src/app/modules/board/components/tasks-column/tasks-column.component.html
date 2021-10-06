@@ -12,7 +12,7 @@
     <div
         class="cards"
         cdkDropList
-        [cdkDropListData]="column.cardsIds"
+        [cdkDropListData]="column.cards"
         (cdkDropListDropped)="drop($any($event))"
     >
         <app-task

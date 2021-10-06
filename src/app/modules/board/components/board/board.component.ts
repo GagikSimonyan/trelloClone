@@ -85,6 +85,6 @@ export class BoardComponent implements OnInit {
     );
 
     event.container.data.forEach((list, index) => list.position = index + 1);
-    this.tasksListService.updateTasksPositions(this.tasksLists).subscribe()
+    this.tasksListService.updateTasksListsPositions(this.tasksLists).subscribe()
   }
 }

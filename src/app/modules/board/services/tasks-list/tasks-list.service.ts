@@ -35,7 +35,7 @@ export class TasksListService {
     return this.http.delete<TasksList>(`${environment.baseUrl}/lists/` + id);
   }
 
-  updateTasksPositions(tasksLists: TasksList[]): Observable<any> {
+  updateTasksListsPositions(tasksLists: TasksList[]): Observable<unknown> {
     return zip(...tasksLists.map(list => this.http.patch(`${environment.baseUrl}/lists/${list.id}`, {position: list.position})));
   }
 
